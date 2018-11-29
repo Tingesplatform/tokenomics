@@ -54,12 +54,16 @@ class ERC20Token(Account):
 class Bucket(Account):
     """The container of predefined volume storing raised funds"""
 
-    def __init__(self, token=None, max_volume=sys.maxsize, overflow_bkt=None):
+    def __init__(self, token=None, max_volume=sys.maxsize, overflow_bkt=None, name = None):
         super().__init__()
         self.max_volume = max_volume
         self.token = token
         self.taps = []  # egress taps authorized to withdraw
         self.overflow_bkt = overflow_bkt
+        if name:
+            self.name = name
+        else:
+            self.name = self.addr[2:6] + ".." + self.addr[-4:]
 
     def flush(self):
         token_balance = self.token.balance_of(self)
