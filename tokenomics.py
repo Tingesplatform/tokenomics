@@ -54,7 +54,7 @@ class ERC20Token(Account):
 class Bucket(Account):
     """The container of predefined volume storing raised funds"""
 
-    def __init__(self, token=None, max_volume=sys.maxsize, overflow_bkt=None, name = None):
+    def __init__(self, token=None, max_volume=sys.maxsize, overflow_bkt=None, name=None):
         super().__init__()
         self.max_volume = max_volume
         self.token = token

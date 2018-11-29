@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from random import randint
 import pandas as pd
-from tokenomics import Timer, ERC20Token, Bucket
+from tokenomics import Timer
 
 
 def generate_random_payments(date_range=(datetime(2019, 1, 1), datetime(2020, 1, 1)),

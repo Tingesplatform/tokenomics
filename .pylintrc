@@ -1,5 +1,5 @@
 [MASTER]
-good-names=to,df
+good-names=to,df,i
 
 [MESSAGES CONTROL]
 disable=missing-docstring
