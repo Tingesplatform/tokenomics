@@ -1,0 +1,8 @@
+language: python
+python:
+  - "3.6"
+  - "3.6-dev"
+  - "3.7-dev"
+script:
+  - py.test -vvv
+  - pylint *.py
