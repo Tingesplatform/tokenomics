@@ -1,0 +1,5 @@
+[MASTER]
+good-names=to,df
+
+[MESSAGES CONTROL]
+disable=missing-docstring
