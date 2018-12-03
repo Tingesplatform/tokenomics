@@ -6,14 +6,14 @@
 
 ## Abstract
 Tinges project token economy model in Python. 
-It shows how received investment funds power up development cycles in controlled and measurable way. 
+The model shows how the received funds power up the Tinges platform development cycles in a controlled and measurable way. 
 
 ## Contracts
-The funds coming from investors get locked in structure of 2 contract types:
+Invested capital gets locked in a structure of 2 contract types:
 * bucket - keeps given amount of funds. If incoming funds overflows the bucket, the next bucket in chain gets filled;
-* tap - serves withdrawal requests limiting the amount of money the user can reclaim per time interval
+* tap - serves withdrawal requests limiting the amount of money one can reclaim per time interval.
 
-The stack of contracts get configured and connected each other to satisfy the financial model of the project, its 
+The stack of inter-connected contracts gets configured in line with financial model of the Tinges platform, considering its 
 investment and expenditure plans.
 The typical structure:
 
