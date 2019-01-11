@@ -1,7 +1,6 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from random import randint
 import pandas as pd
-from tokenomics import Timer
 
 
 def generate_random_payments(date_range=(datetime(2019, 1, 1), datetime(2020, 1, 1)),
@@ -24,9 +23,7 @@ def generate_random_payments(date_range=(datetime(2019, 1, 1), datetime(2020, 1,
 def process_ingress_payments(payments_set, token, entry_bucket, *args):
     column_names = payments_set[0]
     values = payments_set[1]
-    timer = Timer(start=values[0][0] - timedelta(seconds=1))
     for payment in values:
-        timer.time = payment[0]
         token.mint(entry_bucket, payment[1])
         entry_bucket.flush()
         for i in [entry_bucket] + list(args):
