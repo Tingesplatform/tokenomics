@@ -5,15 +5,15 @@
 [![Python](https://img.shields.io/badge/python-3.5,%203.6,%203.7-blue.svg)](https://travis-ci.com/Tingesplatform/tokenomics)
 
 ## Abstract
-Tinges project token economy model in Python. 
-The model shows how the received funds power up the Tinges platform development cycles in a controlled and measurable way. 
+Tinges project token economy model in Python.
+The model shows how the received funds power up the Tinges platform development cycles in a controlled and measurable way.
 
 ## Contracts
 Invested capital gets locked in a structure of 2 contract types:
 * bucket - keeps given amount of funds. If incoming funds overflows the bucket, the next bucket in chain gets filled;
 * tap - serves withdrawal requests limiting the amount of money one can reclaim per time interval.
 
-The stack of interconnected contracts gets configured in line with financial model of the Tinges platform, considering its 
+The stack of interconnected contracts gets configured in line with financial model of the Tinges platform, considering its
 investment and expenditure plans.
 The typical structure:
 
@@ -22,7 +22,7 @@ The typical structure:
  investors
   |  |  |
   V  V  V
-  
+
  \   bkt1  /
   \-------/--+----+overflow
    \     / cap1   |
@@ -52,9 +52,15 @@ The typical structure:
 python psewdocode to build the hierarchy looks like:
 ```
 token = ERC20Token()
-bkt3 = Bucket(token=token, max_volume=cap3)
-bkt2 = Bucket(token=token, max_volume=cap2, overflow_bkt=bkt3)
-bkt1 = Bucket(token=token, max_volume=cap1, overflow_bkt=bkt2)
+bkt_one = Bucket(token=token, max_volume=100000, name="bkt_01", withdraw_begin=datetime.now())
+bkt_two = Bucket(token=token, max_volume=200000, name="bkt_02", withdraw_begin=datetime.now())
+bkt_three = Bucket(token=token, max_volume=300000, name="bkt_03", withdraw_begin=datetime.now())
+bkt_four = Bucket(token=token, name="bkt_04", withdraw_begin=datetime.now())
+
+bkt_one.set_overflow_bucket(bkt_two)
+bkt_one.set_overflow_bucket(bkt_two)
+bkt_one.set_overflow_bucket(bkt_two)
+
 tap1 = Tap(bucket=bkt1, rate=RATE1)
 tap2_1 = Tap(bucket=bkt2, rate=RATE2_1)
 tap2_2 = Tap(bucket=bkt2, rate=RATE2_2)
@@ -63,7 +69,7 @@ tap3_2 = Tap(bucket=bkt3, rate=RATE3_2)
 tap3_3 = Tap(bucket=bkt3, rate=RATE3_3)
 ```
 
-after the time the person which allowed to use the tap (developer, contractor) 
+after the time the person which allowed to use the tap (developer, contractor)
 can reclaim the limited amount of funds from the connected bucket
 
 ```
@@ -71,12 +77,16 @@ tap3_3.withdraw(N)
 ```
 
 ## Run
-To see API in action use tests and/or jupyter notebook
+Python 3.7 is required
+
+```
+pip3 install pipenv
+pipenv install
+```
 
 ### Test
 Install python dependencies and run tests locally
 ```
-pip3 install -r requirements.txt
 py.test -v
 ```
 
@@ -86,7 +96,7 @@ The notebook can be opened in online viewer [here](https://nbviewer.jupyter.org/
 
 ### Offline Jupyter
 
-For better debugging capabilities you can 
+For better debugging capabilities you can
 [install jupyter notebook](https://jupyter.readthedocs.io/en/latest/install.html) locally and run it in separate console.
 Don't forget to satisfy dependencies.
 ```
